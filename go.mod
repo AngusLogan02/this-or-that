@@ -1,4 +1,4 @@
-module thisOrThat
+module this-or-that
 
 go 1.18
 
