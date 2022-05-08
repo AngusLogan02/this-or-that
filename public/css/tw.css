@@ -526,24 +526,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
-.from-green-300 {
-  --tw-gradient-from: #86efac;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(134 239 172 / 0));
-}
-
-.from-pink-500 {
-  --tw-gradient-from: #ec4899;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(236 72 153 / 0));
-}
-
 .from-green-500 {
   --tw-gradient-from: #22c55e;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(34 197 94 / 0));
 }
 
-.from-yellow-500 {
-  --tw-gradient-from: #eab308;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(234 179 8 / 0));
+.from-pink-500 {
+  --tw-gradient-from: #ec4899;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(236 72 153 / 0));
 }
 
 .via-blue-500 {
@@ -562,16 +552,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-to: #eab308;
 }
 
-.to-pink-500 {
-  --tw-gradient-to: #ec4899;
-}
-
 .bg-400\% {
   background-size: 400%;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .align-middle {
@@ -593,7 +575,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(245 245 245 / var(--tw-text-opacity));
 }
 
-@-webkit-keyframes AnimationName {
+.background-animate {
+  background-size: 400%;
+  -webkit-animation: gradient 3s ease infinite forwards;
+  animation: gradient 3s ease infinite forwards;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+@-webkit-keyframes gradient {
   0%,
     100% {
     background-position: 0% 100%;
@@ -604,7 +594,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-@keyframes AnimationName {
+@keyframes gradient {
   0%,
     100% {
     background-position: 0% 100%;
@@ -617,6 +607,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:background-animate:hover {
   background-size: 400%;
-  -webkit-animation: AnimationName 3s ease infinite;
-  animation: AnimationName 3s ease infinite;
+  -webkit-animation: gradient 3s ease infinite forwards;
+  animation: gradient 3s ease infinite forwards;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+.hover\:background-animate-hover:hover {
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
 }
