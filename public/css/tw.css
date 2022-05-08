@@ -500,6 +500,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   place-items: center;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -566,8 +570,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-size: 400%;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .align-middle {
   vertical-align: middle;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-neutral-900 {
