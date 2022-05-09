@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -38,8 +37,6 @@ type Query struct {
 func GetOptions(category string) (this string, that string) {
 	reqUrl := "https://en.wikipedia.org/w/api.php?action=query&titles=" + category + "&prop=links&pllimit=max&format=json"
 
-	fmt.Println(reqUrl)
-
 	res, err := http.Get(reqUrl)
 
 	if err != nil {
@@ -63,12 +60,12 @@ func GetOptions(category string) (this string, that string) {
 		key = k
 	}
 
-	var bruh ID
-	json.Unmarshal(response.Query.Pages[key], &bruh)
+	var ID ID
+	json.Unmarshal(response.Query.Pages[key], &ID)
 	// fmt.Println(response.Query.Pages)
 
 	var options [500]string
-	for i, val := range bruh.Links {
+	for i, val := range ID.Links {
 		options[i] = val.Title
 	}
 
@@ -78,6 +75,6 @@ func GetOptions(category string) (this string, that string) {
 	for rand1 == rand2 {
 		rand2 = rand.Intn(500)
 	}
-	fmt.Println(options)
+
 	return options[rand1], options[rand2]
 }

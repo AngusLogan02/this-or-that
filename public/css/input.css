@@ -9,12 +9,8 @@
     -webkit-animation: gradient 3s ease infinite forwards;
     -moz-animation: gradient 3s ease infinite forwards;
     animation: gradient 3s ease infinite forwards;
-    animation-play-state: paused;
-  }
-
-.background-animate-hover {
     animation-play-state: running;
-}
+  }
 
   @keyframes gradient {
     0%,
