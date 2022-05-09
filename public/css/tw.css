@@ -605,14 +605,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-.hover\:background-animate:hover {
-  background-size: 400%;
-  -webkit-animation: gradient 3s ease infinite forwards;
-  animation: gradient 3s ease infinite forwards;
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-}
-
 .hover\:background-animate-hover:hover {
   -webkit-animation-play-state: running;
           animation-play-state: running;
