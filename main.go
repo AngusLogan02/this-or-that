@@ -2,6 +2,7 @@ package main
 
 import (
 	"this-or-that/handlers"
+	"this-or-that/utility"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -9,6 +10,7 @@ import (
 )
 
 func main() {
+	utility.Init("my.db")
 	r := gin.Default()
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))

@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.7.7
+	go.etcd.io/bbolt v1.3.6
 )
 
 require (
