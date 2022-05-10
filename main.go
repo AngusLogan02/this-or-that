@@ -11,7 +11,9 @@ import (
 
 func main() {
 	utility.Init("my.db")
+
 	r := gin.Default()
+
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 

@@ -65,11 +65,12 @@ func Increment(key string) {
 
 	currentCount := Get(db, "Video_game", key)
 
-	var newCount int
 	currentCountInt, err := strconv.Atoi(currentCount)
 	if err != nil {
 		log.Fatal("Something's up with the database. Error converting to int.", err)
 	}
+
+	var newCount int
 	newCount = currentCountInt + 1
 	newCountStr := strconv.Itoa(newCount)
 
