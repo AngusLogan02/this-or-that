@@ -46,6 +46,7 @@ func ThatHandler(c *gin.Context) {
 
 func StatsHandler(c *gin.Context) {
 	category := "Video_game"
-	utility.GenGraph(category)
-	c.HTML(http.StatusOK, "stats.html", gin.H{"category": category})
+	keys, values := utility.Iterate(category)
+
+	c.HTML(http.StatusOK, "stats.html", gin.H{"category": category, "keys": keys, "values": values})
 }

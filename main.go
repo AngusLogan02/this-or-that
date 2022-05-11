@@ -18,7 +18,8 @@ func main() {
 	r.Use(sessions.Sessions("mysession", store))
 
 	r.LoadHTMLGlob("public/html/*")
-	r.Static("/static", "./public/css")
+	r.Static("/static/css", "./public/css")
+	r.Static("/static/js", "./public/js")
 
 	r.GET("/", handlers.IndexHandler)
 	r.GET("/this", handlers.ThisHandler)

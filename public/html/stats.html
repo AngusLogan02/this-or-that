@@ -1,9 +1,10 @@
 <head>
     <title>This or That</title>
-    <link rel="stylesheet" href="static/tw.css">
+    <link rel="stylesheet" href="static/css/tw.css">
+    <script src="static/js/echarts.js"></script>
 </head>
 <body class="bg-neutral-300 dark: bg-neutral-800 text-neutral-900 dark: text-neutral-100 align-middle">
-    <div class="w-3/5 m-auto flex flex-row h-screen justify-center border-2 border-white">
+    <div class="w-3/5 m-auto justify-center">
         <div class="flex justify-center pt-32">
             <h1 class="text-5xl">Statistics for&nbsp</h1>
             {{ if (eq .category "Video_game") }}
@@ -12,6 +13,52 @@
                 <h1 class="text-2xl">Unknown Category</h1>
             {{ end }}
         </div>
-        {{ template "bar.html" }}
     </div>
+    <div  class="m-auto pt-20">
+        <div id="graph"style="width: 100%;height:80%;"></div>
+    </div>
+        
+        <!-- Prepare a DOM with a defined width and height for ECharts -->
+        <script type="text/javascript">
+            // Initialize the echarts instance based on the prepared dom
+            var myChart = echarts.init(document.getElementById('graph'));
+
+            // Specify the configuration items and data for the chart
+            var option = {
+                tooltip: {},
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0, color: '#ec4899' // color at 0%
+                    }, {
+                        offset: 0.5, color: '#ef4444' // color at 100%
+                    }, {
+                        offset: 1, color: '#eab308'
+                    }],
+                    global: false // default is false
+                },
+                xAxis: {
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 30,
+                    },
+                    data: {{ .keys }},
+                },
+                yAxis: {},
+                series: [
+                {
+                    name: 'sales',
+                    type: 'bar',
+                    data: {{ .values }},
+                }
+                ]
+            };
+
+            // Display the chart using the configuration items and data just specified.
+            myChart.setOption(option);
+        </script>
 </body>
