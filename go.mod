@@ -5,6 +5,8 @@ go 1.18
 require (
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.7.7
+	github.com/go-echarts/go-echarts v1.0.0
+	github.com/go-echarts/go-echarts/v2 v2.2.4
 	go.etcd.io/bbolt v1.3.6
 )
 

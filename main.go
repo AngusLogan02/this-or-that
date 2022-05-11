@@ -23,6 +23,7 @@ func main() {
 	r.GET("/", handlers.IndexHandler)
 	r.GET("/this", handlers.ThisHandler)
 	r.GET("/that", handlers.ThatHandler)
+	r.GET("/stats", handlers.StatsHandler)
 
 	r.Run()
 }

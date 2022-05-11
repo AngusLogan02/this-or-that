@@ -1,0 +1,17 @@
+<head>
+    <title>This or That</title>
+    <link rel="stylesheet" href="static/tw.css">
+</head>
+<body class="bg-neutral-300 dark: bg-neutral-800 text-neutral-900 dark: text-neutral-100 align-middle">
+    <div class="w-3/5 m-auto flex flex-row h-screen justify-center border-2 border-white">
+        <div class="flex justify-center pt-32">
+            <h1 class="text-5xl">Statistics for&nbsp</h1>
+            {{ if (eq .category "Video_game") }}
+                <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 background-animate">Video Games</h1>
+            {{ else }}
+                <h1 class="text-2xl">Unknown Category</h1>
+            {{ end }}
+        </div>
+        {{ template "bar.html" }}
+    </div>
+</body>

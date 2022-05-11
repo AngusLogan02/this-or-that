@@ -1,10 +1,14 @@
 package utility
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"time"
 
+	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/opts"
 	bolt "go.etcd.io/bbolt"
 )
 
@@ -77,4 +81,70 @@ func Increment(key string) {
 	Set(db, "Video_game", key, newCountStr)
 
 	db.Close()
+}
+
+func Iterate(bucket string) ([]string, []opts.BarData) {
+	values := make([]opts.BarData, 0)
+	keys := make([]string, 0)
+
+	db := Open("my.db")
+	db.View(func(tx *bolt.Tx) error {
+		// Assume bucket exists and has keys
+		b := tx.Bucket([]byte(bucket))
+
+		c := b.Cursor()
+		i := 0
+		for k, v := c.First(); k != nil && i < 500; k, v = c.Next() {
+			keys = append(keys, string(k))
+			fmt.Println("key", i, ":", string(k))
+			value, _ := strconv.Atoi(string(v))
+			fmt.Println("val", i, ":", string(v))
+			values = append(values, opts.BarData{Value: value})
+			i++
+		}
+
+		return nil
+	})
+	db.Close()
+	return keys, values
+}
+
+func GenGraph(category string) {
+	keys, values := Iterate(category)
+
+	bar := charts.NewBar()
+	bar.SetGlobalOptions(
+		charts.WithXAxisOpts(opts.XAxis{
+			AxisLabel: &opts.AxisLabel{
+				Interval:     "0",
+				Rotate:       30,
+				ShowMinLabel: true,
+				ShowMaxLabel: true,
+				Color:        "#f5f5f5",
+			},
+		}),
+		charts.WithYAxisOpts(opts.YAxis{
+			AxisLabel: &opts.AxisLabel{
+				Interval:     "0",
+				ShowMinLabel: true,
+				ShowMaxLabel: true,
+				Color:        "#f5f5f5",
+			},
+			SplitLine: &opts.SplitLine{
+				Show:      true,
+				LineStyle: &opts.LineStyle{Color: "#f5f5f5"},
+			},
+		}),
+		charts.WithInitializationOpts(opts.Initialization{
+			Width:           "1920px",
+			Height:          "1080px",
+			BackgroundColor: "transparent",
+		}),
+		charts.WithColorsOpts(opts.Colors{"#ef4444"}),
+	)
+	bar.SetXAxis(keys).AddSeries("Votes", values).SetSeriesOptions(charts.WithLineStyleOpts(opts.LineStyle{Color: "#262626"}))
+	// bar.SetXAxis([]string{"1981 in video games", "1983 in video games", "Wed", "Thu", "Fri", "Sat", "Sun", "Sun", "Sun", "Sun"}).AddSeries("Votes", values)
+
+	f, _ := os.Create("public/html/bar.html")
+	bar.Render(f)
 }
