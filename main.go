@@ -19,7 +19,6 @@ func main() {
 
 	r.LoadHTMLGlob("public/html/*")
 	r.Static("/static/css", "./public/css")
-	r.Static("/static/js", "./public/js")
 
 	r.GET("/", handlers.IndexHandler)
 	r.GET("/this", handlers.ThisHandler)
