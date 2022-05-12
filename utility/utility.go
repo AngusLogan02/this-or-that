@@ -3,6 +3,7 @@ package utility
 import (
 	"fmt"
 	"log"
+	"sort"
 	"strconv"
 	"time"
 
@@ -121,6 +122,8 @@ func Sort(keys []string, values []string) (sortedKeys []string, sortedValues []s
 		votes = append(votes, Votes{Name: keys[i], NumVotes: valueInt})
 		fmt.Println(i)
 	}
+
+	sort.Sort(ByVotes(votes))
 
 	sortedKeys = make([]string, 0)
 	sortedValues = make([]string, 0)
