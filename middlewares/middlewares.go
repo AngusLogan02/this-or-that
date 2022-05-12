@@ -62,7 +62,6 @@ func GetOptions(category string) (this string, that string) {
 
 	var ID ID
 	json.Unmarshal(response.Query.Pages[key], &ID)
-	// fmt.Println(response.Query.Pages)
 
 	var options [500]string
 	for i, val := range ID.Links {

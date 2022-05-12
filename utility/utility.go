@@ -1,7 +1,6 @@
 package utility
 
 import (
-	"fmt"
 	"log"
 	"sort"
 	"strconv"
@@ -120,7 +119,6 @@ func Sort(keys []string, values []string) (sortedKeys []string, sortedValues []s
 	for i := range keys {
 		valueInt, _ := strconv.Atoi(values[i])
 		votes = append(votes, Votes{Name: keys[i], NumVotes: valueInt})
-		fmt.Println(i)
 	}
 
 	sort.Sort(ByVotes(votes))
