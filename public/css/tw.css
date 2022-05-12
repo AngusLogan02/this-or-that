@@ -472,14 +472,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: fixed;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
-.right-0 {
-  right: 0px;
-}
-
 .bottom-16 {
   bottom: 4rem;
 }
@@ -494,6 +486,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex {
   display: flex;
+}
+
+.grid {
+  display: grid;
 }
 
 .h-screen {

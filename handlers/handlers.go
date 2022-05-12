@@ -47,6 +47,7 @@ func ThatHandler(c *gin.Context) {
 func StatsHandler(c *gin.Context) {
 	category := "Video_game"
 	keys, values := utility.Iterate(category)
+	keys, values = utility.Sort(keys, values)
 
 	c.HTML(http.StatusOK, "stats.html", gin.H{"category": category, "keys": keys, "values": values})
 }

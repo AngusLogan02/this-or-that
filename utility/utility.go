@@ -1,12 +1,24 @@
 package utility
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"time"
 
 	bolt "go.etcd.io/bbolt"
 )
+
+type Votes struct {
+	Name     string
+	NumVotes int
+}
+
+type ByVotes []Votes
+
+func (a ByVotes) Len() int           { return len(a) }
+func (a ByVotes) Less(i, j int) bool { return a[i].NumVotes > a[j].NumVotes }
+func (a ByVotes) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 
 func Init(file string) {
 	db, err := bolt.Open(file, 0600, &bolt.Options{Timeout: 1 * time.Second})
@@ -90,7 +102,7 @@ func Iterate(bucket string) (keys []string, values []string) {
 
 		c := b.Cursor()
 		i := 0
-		for k, v := c.First(); k != nil && i < 50; k, v = c.Next() {
+		for k, v := c.First(); k != nil && i < 500; k, v = c.Next() {
 			keys = append(keys, string(k))
 			values = append(values, string(v))
 			i++
@@ -100,4 +112,24 @@ func Iterate(bucket string) (keys []string, values []string) {
 	})
 	db.Close()
 	return keys, values
+}
+
+func Sort(keys []string, values []string) (sortedKeys []string, sortedValues []string) {
+	votes := make([]Votes, 0)
+	for i := range keys {
+		valueInt, _ := strconv.Atoi(values[i])
+		votes = append(votes, Votes{Name: keys[i], NumVotes: valueInt})
+		fmt.Println(i)
+	}
+
+	sortedKeys = make([]string, 0)
+	sortedValues = make([]string, 0)
+
+	for i := 0; i < 50; i++ {
+		key := votes[i].Name
+		value := votes[i].NumVotes
+		sortedKeys = append(sortedKeys, key)
+		sortedValues = append(sortedValues, strconv.Itoa(value))
+	}
+	return sortedKeys, sortedValues
 }
