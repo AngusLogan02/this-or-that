@@ -69,7 +69,7 @@ func GetOptions(category string) (this string, that string) {
 		options[i] = val.Title
 	}
 
-	rand.Seed(time.Now().Unix())
+	rand.Seed(time.Now().UnixNano())
 	rand1 := rand.Intn(500)
 	rand2 := rand.Intn(500)
 	for rand1 == rand2 {
