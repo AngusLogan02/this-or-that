@@ -29,6 +29,9 @@
             // Specify the configuration items and data for the chart
             var option = {
                 tooltip: {},
+                textStyle: {
+                    color: "#f5f5f5",
+                },
                 color: {
                     type: 'linear',
                     x: 0,
@@ -45,13 +48,23 @@
                     global: false // default is false
                 },
                 xAxis: {
+                    axisLine: {
+                        lineStyle: {
+                            color: "#f5f5f5",
+                        },
+                    },
                     axisLabel: {
                         interval: 0,
                         rotate: 30,
                     },
                     data: {{ .keys }},
                 },
-                yAxis: {},
+                grid: {
+                    bottom: "20%",
+                },
+                yAxis: {
+                    name: "Number of Votes"
+                },
                 series: [
                 {
                     name: 'votes',
